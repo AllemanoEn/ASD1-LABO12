@@ -81,32 +81,34 @@ void parcourLargeur(string sommet){
         }
     }
 }
-/*
+
 string swap(string sommetDebut, size_t PositionZero, size_t PositionEchange){
     std::swap(sommetDebut[PositionZero], sommetDebut[PositionEchange]);
     return sommetDebut;
 }
- */
+
 
 vector<string> recupererVoisins(const string& sommet){
     vector<string> voisins;
     size_t PositionZero = sommet.find('0');
 
     if(PositionZero % NB_COLONNE + 1 != 1){
-        size_t PositionEchange = PositionZero-1;
-        std::swap(sommet[PositionZero], sommet[PositionEchange]);
+
         voisins.push_back(swap(sommet, PositionZero, PositionZero - 1));
     }
 
     if(PositionZero % NB_COLONNE + 1 != NB_COLONNE){
+
         voisins.push_back(swap(sommet, PositionZero, PositionZero + 1));
     }
 
     if(PositionZero / NB_LIGNE + 1 != 1){
+
         voisins.push_back(swap(sommet, PositionZero, PositionZero - NB_LIGNE));
     }
 
     if(PositionZero / NB_LIGNE + 1 != NB_LIGNE){
+
         voisins.push_back(swap(sommet, PositionZero, PositionZero + NB_LIGNE));
     }
 
