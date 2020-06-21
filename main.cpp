@@ -40,7 +40,7 @@ string swap(string sommetDebut, size_t PositionZero, size_t PositionEchange);
  * @param sommet Sommet dont nous voulons connaitre le voisin
  * @return Un Vector de string qui contient tous les voisins du sommet
  */
-vector<string> recupererVoisins(const string& sommet);
+vector<string> recupererVoisins(string& sommet);
 
 /**
  * Affiche la chaîne de résolution si la solution est trouvé
@@ -88,26 +88,32 @@ string swap(string sommetDebut, size_t PositionZero, size_t PositionEchange){
 }
  */
 
-vector<string> recupererVoisins(const string& sommet){
+vector<string> recupererVoisins(string& sommet){
     vector<string> voisins;
     size_t PositionZero = sommet.find('0');
 
     if(PositionZero % NB_COLONNE + 1 != 1){
         size_t PositionEchange = PositionZero-1;
-        std::swap(sommet[PositionZero], sommet[PositionEchange]);
-        voisins.push_back(swap(sommet, PositionZero, PositionZero - 1));
+        swap(sommet[PositionZero], sommet[PositionEchange]);
+        voisins.push_back(sommet);
     }
 
     if(PositionZero % NB_COLONNE + 1 != NB_COLONNE){
-        voisins.push_back(swap(sommet, PositionZero, PositionZero + 1));
+        size_t PositionEchange = PositionZero+1;
+        swap(sommet[PositionZero], sommet[PositionEchange]);
+        voisins.push_back(sommet);
     }
 
     if(PositionZero / NB_LIGNE + 1 != 1){
-        voisins.push_back(swap(sommet, PositionZero, PositionZero - NB_LIGNE));
+        size_t PositionEchange = PositionZero - NB_LIGNE;
+        swap(sommet[PositionZero], sommet[PositionEchange]);
+        voisins.push_back(sommet);
     }
 
     if(PositionZero / NB_LIGNE + 1 != NB_LIGNE){
-        voisins.push_back(swap(sommet, PositionZero, PositionZero + NB_LIGNE));
+        size_t PositionEchange = PositionZero + NB_LIGNE;
+        swap(sommet[PositionZero], sommet[PositionEchange]);
+        voisins.push_back(sommet);
     }
 
     return voisins;
